@@ -94,7 +94,7 @@
             <li>
                 <a href="{{ route('SobreNosostros') }}" class="text-gray-700 hover:text-indigo-600 transition duration-300 flex items-center">
                     <i class="fa-solid fa-users mr-2"></i>
-                    Sobre Nosotros
+                    Vacantes
                 </a>
             </li>
             <li>

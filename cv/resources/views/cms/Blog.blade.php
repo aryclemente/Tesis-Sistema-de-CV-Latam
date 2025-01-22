@@ -16,50 +16,102 @@
                     </p>
                 </div>
 
-                <!-- Mostrar publicaciones si existen, o mensaje si no hay -->
+                <!-- Mostrar publicaciones -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                    @forelse($publications as $publication)
-                        <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:shadow-xl hover:scale-105">
-                            <img src="{{ asset('storage/' . $publication->image) }}" alt="{{ $publication->title }}" class="w-full h-48 object-cover">
-                            <div class="p-6">
-                                <h2 class="text-xl font-semibold text-gray-800 hover:text-indigo-600 transition duration-300">
-                                    {{ $publication->title }}
-                                </h2>
-                                <p class="mt-3 text-gray-600">
-                                    {!! $publication->content !!}
-                                </p>
 
-                                <!-- Información del autor y fecha -->
-                                <div class="mt-4 text-sm text-gray-500">
-                                    <p>Publicado por: {{ $publication->user->first_name }} {{ $publication->user->last_name }}</p>
-                                    <p>Fecha de publicación: {{ \Carbon\Carbon::parse($publication->fecha_publicacion)->format('d/m/Y') }}</p>
-                                </div>
+                    <!-- Primer blog -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:shadow-xl hover:scale-105">
+                        <img src="https://via.placeholder.com/400x250" alt="Imagen del blog 1" class="w-full h-48 object-cover">
 
-                                <!-- Mostrar la categoría de la publicación debajo de la fecha -->
-                                @if($publication->categoria) <!-- Este es el campo que contiene la categoría -->
-                                    <div class="text-sm font-medium text-indigo-600 mt-4">
-                                        Categoría: {{ $publication->categoria }}
-                                    </div>
-                                @endif
+                        <div class="p-6">
+                            <h2 class="text-xl font-semibold text-gray-800 hover:text-indigo-600 transition duration-300">
+                                Título del Blog 1
+                            </h2>
+                            <p class="mt-3 text-gray-600">
+                                Esta es una breve descripción del contenido del blog 1. Aquí puedes añadir un resumen o extracto del artículo.
+                            </p>
 
-                                <!-- Botón de "Leer más" -->
+                            <div class="mt-4 text-sm text-gray-500">
+                                <p>Publicado por: Juan Pérez</p>
+                                <p>Fecha de publicación: 22/01/2025</p>
+                            </div>
 
+                            <div class="text-sm font-medium text-indigo-600 mt-4">
+                                Categoría: Tecnología
+                            </div>
+
+                            <div class="mt-4">
+                                <a href="#" class="text-indigo-600 font-semibold hover:text-indigo-800 transition duration-300">
+                                    Leer más &rarr;
+                                </a>
                             </div>
                         </div>
-                    @empty
-                        <!-- Si no hay publicaciones -->
-                        <div class="col-span-3 text-center">
-                            <p class="text-lg text-gray-600">No hay publicaciones disponibles en este momento.</p>
+                    </div>
+
+                    <!-- Segundo blog -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:shadow-xl hover:scale-105">
+                        <img src="https://via.placeholder.com/400x250" alt="Imagen del blog 2" class="w-full h-48 object-cover">
+
+                        <div class="p-6">
+                            <h2 class="text-xl font-semibold text-gray-800 hover:text-indigo-600 transition duration-300">
+                                Título del Blog 2
+                            </h2>
+                            <p class="mt-3 text-gray-600">
+                                Esta es una breve descripción del contenido del blog 2. Aquí puedes añadir un resumen o extracto del artículo.
+                            </p>
+
+                            <div class="mt-4 text-sm text-gray-500">
+                                <p>Publicado por: Laura González</p>
+                                <p>Fecha de publicación: 15/01/2025</p>
+                            </div>
+
+                            <div class="text-sm font-medium text-indigo-600 mt-4">
+                                Categoría: Emprendimiento
+                            </div>
+
+                            <div class="mt-4">
+                                <a href="#" class="text-indigo-600 font-semibold hover:text-indigo-800 transition duration-300">
+                                    Leer más &rarr;
+                                </a>
+                            </div>
                         </div>
-                    @endforelse
+                    </div>
+
+                    <!-- Tercer blog -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:shadow-xl hover:scale-105">
+                        <img src="https://via.placeholder.com/400x250" alt="Imagen del blog 3" class="w-full h-48 object-cover">
+
+                        <div class="p-6">
+                            <h2 class="text-xl font-semibold text-gray-800 hover:text-indigo-600 transition duration-300">
+                                Título del Blog 3
+                            </h2>
+                            <p class="mt-3 text-gray-600">
+                                Esta es una breve descripción del contenido del blog 3. Aquí puedes añadir un resumen o extracto del artículo.
+                            </p>
+
+                            <div class="mt-4 text-sm text-gray-500">
+                                <p>Publicado por: Mario Rodríguez</p>
+                                <p>Fecha de publicación: 10/01/2025</p>
+                            </div>
+
+                            <div class="text-sm font-medium text-indigo-600 mt-4">
+                                Categoría: Desarrollo Personal
+                            </div>
+
+                            <div class="mt-4">
+                                <a href="#" class="text-indigo-600 font-semibold hover:text-indigo-800 transition duration-300">
+                                    Leer más &rarr;
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
 
                 <!-- Paginación -->
-                @if($publications->count() > 0)
-                    <div class="mt-8">
-                        {{ $publications->links() }}
-                    </div>
-                @endif
+                <div class="mt-8">
+                    <!-- Aquí puedes agregar los enlaces de paginación si los necesitas -->
+                </div>
 
             </div>
         </section>
