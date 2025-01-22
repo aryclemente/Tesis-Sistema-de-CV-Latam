@@ -19,6 +19,7 @@ use App\Http\Controllers\PostController;
 
 Route::get('/', [HomeController::class, 'showHomePage'])->name('HomePage');
 
+
 Route::get('Blog', [BlogController::class, 'showBlog'])->name('Blog');
 
 
@@ -103,8 +104,6 @@ Route::get('/public',[VisitanteController::class, 'index'])->name('public.index'
 // En routes/web.php
 
 Route::get('/{slug}', [VisitanteController::class, 'viewPage'])->name('pages.slug');
-
-// lista
 
 //Route::get('list-post', [ListController::class, 'showPosts'])->name('posts.list');
 Route::get('/posts/lista', [PostController::class, 'index'])->name('posts.lista');
