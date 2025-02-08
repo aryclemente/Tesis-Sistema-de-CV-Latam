@@ -19,10 +19,7 @@ return new class extends Migration
             $table->string('description');
             $table->enum('status', ['draft', 'published', 'archived']);
             $table->timestamps();
-            // Valor predeterminado para users_idusers
-            $table->foreignId('users_idusers')->default(1)
-                ->constrained('users', 'idusers')
-                ->onDelete('cascade');
+           
         });
     }
 
