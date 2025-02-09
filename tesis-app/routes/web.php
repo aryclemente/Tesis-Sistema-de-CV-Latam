@@ -20,6 +20,12 @@ Route::get('/nosotros', function () {
     return view('visitante.SobreNosostros'); // Muestra la vista Nosotros
 })->name('nosotros');
 
+// web.php
+// web.php
+Route::get('/get-ciudades/{estado_id}', [AuhtController::class, 'getCiudades']);
+Route::get('/get-municipios/{estado_id}', [AuhtController::class, 'getMunicipios']);
+Route::get('/get-parroquias/{municipio_id}', [AuhtController::class, 'getParroquias']);
+
 
 Route::prefix('auth')->group(function () {
 

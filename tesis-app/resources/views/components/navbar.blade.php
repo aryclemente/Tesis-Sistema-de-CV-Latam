@@ -60,7 +60,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/">
+                    <a href=" {{ route('register') }} ">
                         <button class="px-5 py-2 text-lg font-medium text-white bg-indigo-700 rounded-full shadow-md hover:bg-indigo-800 transition duration-300 ease-in-out transform hover:scale-110 focus:ring focus:ring-indigo-500">
                             <i class="fa-solid fa-user-plus"></i>
                             Registrarse
@@ -111,7 +111,7 @@
                     Iniciar Sesión
                 </button>
             </a>
-            <a href="/">
+            <a href=" {{ route('register') }}">
                 <button class="px-5 py-2 w-full text-lg font-medium text-white bg-indigo-700 rounded-full shadow-md hover:bg-indigo-800 transition duration-300 ease-in-out transform hover:scale-110 focus:ring focus:ring-indigo-500">
                     <i class="fa-solid fa-user-plus"></i>
                     Registrarse

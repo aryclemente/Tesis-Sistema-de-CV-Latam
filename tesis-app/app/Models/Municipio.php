@@ -9,18 +9,18 @@ class Municipio extends Model
 {
     use HasFactory;
 
-    // Definimos el nombre de la tabla, si no es plural del modelo (por convención Laravel usa plural)
     protected $table = 'municipios';
+    protected $fillable = ['municipio', 'estado_id', 'ciudad_id'];
 
-    // Los campos que pueden ser asignados masivamente
-    protected $fillable = ['municipio', 'estado_id'];
-
-    // Relación con el modelo Estado (cada municipio pertenece a un estado)
-    public function estado()
+    public function ciudad()
     {
-        return $this->belongsTo(Estado::class, 'estado_id');
+        return $this->belongsTo(Ciudad::class, 'ciudad_id');
     }
 
-    // Si no deseas usar los campos `created_at` y `updated_at`, desactívalos:
-    // public $timestamps = false;
+    public function parroquias()
+    {
+        return $this->hasMany(Parroquia::class);
+    }
 }
+
+

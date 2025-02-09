@@ -2173,7 +2173,7 @@ return new class extends Migration
         Schema::create('certificaciones', function (Blueprint $table) {
             $table->id();
             $table->string('institucion', 45)->nullable();
-            $table->string('nombre_institucion')->nullable();
+            $table->string('nombre_certificado')->nullable();
             $table->date('fecha_expedicion')->nullable();
             $table->unsignedBigInteger('user_id')
             ->nullable();

@@ -9,12 +9,18 @@ class Estado extends Model
 {
     use HasFactory;
 
-    // Definimos el nombre de la tabla, si no es plural del modelo (por convención Laravel usa plural)
     protected $table = 'estados';
-
-    // Los campos que pueden ser asignados masivamente
     protected $fillable = ['estado', 'iso_3166_2'];
 
-    // Si no deseas usar los campos `created_at` y `updated_at`, desactívalos:
-    // public $timestamps = false;
+    public function ciudades()
+    {
+        return $this->hasMany(Ciudad::class);
+    }
+
+    public function municipios()
+    {
+        return $this->hasMany(Municipio::class);
+    }
 }
+
+
