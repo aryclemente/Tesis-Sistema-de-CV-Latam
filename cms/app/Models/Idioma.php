@@ -15,4 +15,3 @@ class Idioma extends Model
         'nivel_idioma',
     ];
 }
-

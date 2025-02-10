@@ -11,10 +11,7 @@ class Estudio extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'institucion',
-        'nombre_institucion',
-        'fecha_inicio',
-        'fecha_fin',
+       'estudio_logrado',
         'user_id',
         'niveles_academicos_idniveles_academicos',
         'menciones_idmenciones',

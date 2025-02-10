@@ -20,7 +20,7 @@ return new class extends Migration
 
         DB::table('roles')->insert([
             ['name' => 'Admin'],
-            ['name' => 'Publisher'],
+            ['name' => 'Vacante'],
         ]);
 
         // Crear tabla de nacionalidades
@@ -51,7 +51,7 @@ return new class extends Migration
         Schema::create('estados' ,function (Blueprint $table) {
             $table->id('idestados');
             $table->string('estado', 45);
-            $table->string('iso_3166_2', 45);
+            $table->string('iso_3166_2', 45)->nullable();
         });
 
         DB::table('estados')->insert([
@@ -1584,7 +1584,7 @@ return new class extends Migration
         Schema::create('cuidades', function (Blueprint $table) {
             $table->id('idcuidades');
             $table->string('ciudad', 45);
-            $table->boolean('capital');
+            $table->boolean('capital')->nullable();
             $table->foreignId('estados_idestados')
                   ->constrained('estados', 'idestados')
                   ->onDelete('cascade');
@@ -2135,7 +2135,6 @@ return new class extends Migration
             $table->string('user_name', 45)->nullable()->unique();
             $table->string('address', 45)->nullable();
             $table->string('email', 45)->nullable()->unique();
-            $table->string('phone', 45)->nullable();
             $table->string('password', 255)->nullable();
 
             $table->foreignId('nacionalidad_idnacionalidad')
@@ -2147,7 +2146,7 @@ return new class extends Migration
                   ->on('roles')
                   ->onDelete('cascade');
             // Referencia a ciudades (ciudades ya está creada en este punto)
-            $table->unsignedBigInteger('cuidades_idcuidades')->nullable();
+            $table->unsignedBigInteger('cuidades_idcuidades');
             $table->foreign('cuidades_idcuidades')
                   ->references('idcuidades')
                   ->on('cuidades')
@@ -2168,6 +2167,7 @@ return new class extends Migration
                 'email' => 'isaac.cattoni@gmail.com',
                 'password' => bcrypt('password12345'),
                 'nacionalidad_idnacionalidad' => 1,
+                'cuidades_idcuidades' => 1,
                 'roles_idroles' => 1,
             ],
             [
@@ -2179,6 +2179,7 @@ return new class extends Migration
                 'email' => 'hello.aryc@gmail.com',
                 'password' => bcrypt('123456789'),
                 'nacionalidad_idnacionalidad' => 2,
+                'cuidades_idcuidades' => 2,
                 'roles_idroles' => 2,
             ],
         ]);
@@ -2228,10 +2229,7 @@ return new class extends Migration
 
         Schema::create('estudios', function (Blueprint $table){
             $table->id('idestudios');
-            $table->string('institucion');
-            $table->string('nombre_institucion');
-            $table->date('fecha_inicio');
-            $table->date('fecha_fin');
+            $table->string('estudio_logrado');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')
                   ->references('idusers')

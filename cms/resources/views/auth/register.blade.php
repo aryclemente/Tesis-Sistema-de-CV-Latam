@@ -24,7 +24,7 @@
                                     <label for="first_name" class="block mb-2 text-sm font-medium text-slate-700">Nombres</label>
                                     <input type="text" id="first_name" name="first_name"
                                         class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border-2 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200
-                                        @error('first_name') border-red-500 @else border-slate-300 @enderror"
+                                        @error('first_name') border-red-500 @else  @enderror"
                                         placeholder="Nombre" oninput="validateName(this)" />
                                     @error('first_name')
                                         <small class="text-red-500 mt-1 text-sm">
@@ -37,7 +37,7 @@
                                     <label for="last_name" class="block mb-2 text-sm font-medium text-slate-700">Apellidos</label>
                                     <input type="text" id="last_name" name="last_name"
                                         class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border-2 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200
-                                        @error('last_name') border-red-500 @else border-slate-300 @enderror"
+                                        @error('last_name') border-red-500 @else  @enderror"
                                         placeholder="Apellido" oninput="validateName(this)" />
                                     @error('last_name')
                                         <small class="text-red-500 mt-1 text-sm">
@@ -53,7 +53,7 @@
                                     <label for="date_of_birth" class="block mb-2 text-sm font-medium text-slate-700">Fecha de Nacimiento</label>
                                     <input type="date" id="date_of_birth" name="date_of_birth"
                                         class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border-2 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200
-                                        @error('date_of_birth') border-red-500 @else border-slate-300 @enderror"
+                                        @error('date_of_birth') border-red-500 @else @enderror"
                                         max="{{ now()->subYears(18)->toDateString() }}" min="{{ now()->subYears(124)->toDateString() }}"
                                         onchange="checkAge(this)" />
                                     @error('date_of_birth')
@@ -67,7 +67,7 @@
                                     <label for="nationality" class="block mb-2 text-sm font-medium text-slate-700">Nacionalidad</label>
                                     <select name="nacionalidad" id="nationality"
                                         class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border-2 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200
-                                        @error('nacionalidad') border-red-500 @else border-slate-300 @enderror">
+                                        @error('nacionalidad') border-red-500 @else @enderror">
                                         <option value="" selected>Selecciona Nacionalidad</option>
                                         @foreach ($nacionalidades as $items)
                                             <option value="{{ $items->idnacionalidad }}"
@@ -91,7 +91,7 @@
                                     <div class="relative">
                                         <input type="text" id="cedula" name="cedula"
                                             class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border-2 rounded-lg px-4 py-3 pr-10 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200
-                                            @error('cedula') border-red-500 focus:ring-red-500 @else border-slate-300 @enderror"
+                                            @error('cedula') border-red-500 @else  @enderror"
                                             oninput="validateCedula(event)"
                                             placeholder="Cédula de Identidad" maxlength="10" />
                                         <span class="absolute inset-y-0 right-3 flex items-center pointer-events-none">
@@ -112,6 +112,11 @@
                                         <option value="masculino" @if(old('genero') == 'masculino') selected @endif>Masculino</option>
                                         <option value="femenino" @if(old('genero') == 'femenino') selected @endif>Femenino</option>
                                     </select>
+                                    @error('genero')
+                                        <small class="text-red-500 mt-1 text-sm">
+                                            <strong>{{ $message }}</strong>
+                                        </small>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -200,7 +205,7 @@
                             <div class="grid gap-8 md:grid-cols-2">
                                 <div class="w-full">
                                     <label for="estado" class="block mb-2 text-sm font-medium text-gray-700">Estado</label>
-                                    <select id="estado" name="estado_id" class="w-full bg-white text-gray-700 placeholder:text-gray-400 text-sm border-2 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200">
+                                    <select id="estado" name="estado" class="w-full bg-white text-gray-700 placeholder:text-gray-400 text-sm border-2 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200">
                                         <option value="" selected>Selecciona estado</option>
                                         @foreach ($estados as $items)
                                         <option value="{{ $items->idestados }}" @if (old('estado_id') == $items->idestados) selected @endif>
@@ -213,7 +218,7 @@
 
                                 <div class="w-full">
                                     <label for="ciudad" class="block mb-2 text-sm font-medium text-gray-700">Ciudad</label>
-                                    <select id="ciudad" name="ciudad_id" class="w-full bg-white text-gray-700 placeholder:text-gray-400 text-sm border-2 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200">
+                                    <select id="ciudad" name="ciudad" class="w-full bg-white text-gray-700 placeholder:text-gray-400 text-sm border-2 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200">
                                         <option value="" selected>Selecciona ciudad</option>
                                     </select>
                                 </div>
@@ -222,14 +227,14 @@
                             <div class="grid gap-8 md:grid-cols-2 mt-8">
                                 <div class="w-full">
                                     <label for="municipio" class="block mb-2 text-sm font-medium text-gray-700">Municipio</label>
-                                    <select id="municipio" name="municipio_id" class="w-full bg-white text-gray-700 placeholder:text-gray-400 text-sm border-2 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200">
+                                    <select id="municipio" name="municipio" class="w-full bg-white text-gray-700 placeholder:text-gray-400 text-sm border-2 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200">
                                         <option value="">Selecciona municipio</option>
                                     </select>
                                 </div>
 
                                 <div class="w-full">
                                     <label for="parroquia" class="block mb-2 text-sm font-medium text-gray-700">Parroquia</label>
-                                    <select id="parroquia" name="parroquia_id" class="w-full bg-white text-gray-700 placeholder:text-gray-400 text-sm border-2 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200">
+                                    <select id="parroquia" name="parroquia" class="w-full bg-white text-gray-700 placeholder:text-gray-400 text-sm border-2 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200">
                                         <option value="">Selecciona parroquia</option>
                                     </select>
                                 </div>
@@ -238,7 +243,7 @@
                         <script>
                             // Al cambiar el estado
                             document.getElementById('estado').addEventListener('change', function() {
-                                var estadoId = this.value;
+                                let estadoId = this.value;
 
                                 // Solo realiza la petición si se ha seleccionado un estado
                                 if (estadoId) {
@@ -246,12 +251,12 @@
                                     fetch(`/get-ciudades/${estadoId}`)
                                         .then(response => response.json())
                                         .then(data => {
-                                            var ciudadSelect = document.getElementById('ciudad');
+                                            let ciudadSelect = document.getElementById('ciudad');
                                             ciudadSelect.innerHTML = '<option value="">Selecciona ciudad</option>'; // Limpiar ciudades anteriores
 
                                             // Iteramos por cada ciudad y la agregamos como opción
                                             data.forEach(function(ciudad) {
-                                                var option = document.createElement('option');
+                                                let option = document.createElement('option');
                                                 option.value = ciudad.idcuidades;
                                                 option.textContent = ciudad.ciudad;
                                                 ciudadSelect.appendChild(option);
@@ -262,12 +267,12 @@
                                     fetch(`/get-municipios/${estadoId}`)
                                         .then(response => response.json())
                                         .then(data => {
-                                            var municipioSelect = document.getElementById('municipio');
+                                            let municipioSelect = document.getElementById('municipio');
                                             municipioSelect.innerHTML = '<option value="">Selecciona municipio</option>'; // Limpiar municipios anteriores
 
                                             // Iteramos por cada municipio y lo agregamos como opción
                                             data.forEach(function(municipio) {
-                                                var option = document.createElement('option');
+                                                let option = document.createElement('option');
                                                 option.value = municipio.idmunicipios;
                                                 option.textContent = municipio.municipio;
                                                 municipioSelect.appendChild(option);
@@ -284,19 +289,19 @@
 
                             // Al cambiar el municipio
                             document.getElementById('municipio').addEventListener('change', function() {
-                                var municipioId = this.value;
+                                let municipioId = this.value;
 
                                 // Solo realiza la petición si se ha seleccionado un municipio
                                 if (municipioId) {
                                     fetch(`/get-parroquias/${municipioId}`)
                                         .then(response => response.json())
                                         .then(data => {
-                                            var parroquiaSelect = document.getElementById('parroquia');
+                                            let parroquiaSelect = document.getElementById('parroquia');
                                             parroquiaSelect.innerHTML = '<option value="">Selecciona parroquia</option>'; // Limpiar parroquias anteriores
 
                                             // Iteramos por cada parroquia y la agregamos como opción
                                             data.forEach(function(parroquia) {
-                                                var option = document.createElement('option');
+                                                let option = document.createElement('option');
                                                 option.value = parroquia.idparroquias;
                                                 option.textContent = parroquia.parroquia;
                                                 parroquiaSelect.appendChild(option);
@@ -308,10 +313,6 @@
                             });
                         </script>
 
-
-
-
-
                         <!-- Paso 4 -->
                         <div id="step-4" class="step hidden">
                             <h2 class="text-2xl text-center font-semibold text-indigo-600 mb-8">Paso 4: Información Académica</h2>
@@ -319,28 +320,26 @@
                                 <!-- Nivel Académico -->
                                 <div class="w-full">
                                     <label for="nivel_academico" class="block mb-2 text-sm font-medium text-gray-700">Nivel Académico</label>
-                                    <select id="nivel_academico" name="nivel_academico_id" class="w-full bg-white text-gray-700 placeholder:text-gray-400 text-sm border-2 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200">
+                                    <select id="nivel_academico" name="niveles_academicos_idniveles_academicos" class="w-full bg-white text-gray-700 placeholder:text-gray-400 text-sm border-2 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200">
                                         <option value="">Selecciona un nivel académico</option>
                                         @foreach ($nivelesAcademicos as $item)
-                                            <option value="{{ $item->idniveles_academicos }}" @if (old('nivel_academico_id') == $item->idniveles_academicos) selected @endif>
+                                            <option value="{{ $item->idniveles_academicos }}" @if (old('niveles_academicos_idniveles_academicos') == $item->idniveles_academicos) selected @endif>
                                                 {{ $item->nombre_nivel }}
                                             </option>
                                         @endforeach
-
                                     </select>
                                 </div>
 
                                 <!-- Tipo de Mención -->
                                 <div class="w-full">
                                     <label for="mencion" class="block mb-2 text-sm font-medium text-gray-700">Tipo de Mención</label>
-                                    <select id="mencion" name="mencion_id" class="w-full bg-white text-gray-700 placeholder:text-gray-400 text-sm border-2 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200">
+                                    <select id="mencion" name="menciones_idmenciones" class="w-full bg-white text-gray-700 placeholder:text-gray-400 text-sm border-2 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200">
                                         <option value="">Selecciona una mención</option>
                                         @foreach ($menciones as $items)
-                                            <option value="{{ $items->idmenciones }}" @if (old('mencion_id') == $items->idmenciones) selected @endif>
+                                            <option value="{{ $items->idmenciones }}" @if (old('menciones_idmenciones') == $items->idmenciones) selected @endif>
                                                 {{ $items->nombre_mencion }}
                                             </option>
                                         @endforeach
-
                                     </select>
                                 </div>
                             </div>
@@ -367,61 +366,64 @@
                                                 </label>
                                             </div>
                                         @endforeach
-
                                     </div>
                                 </div>
                             </div>
                         </div>
 
+
+                        <!-- Paso 5 -->
                         <div id="step-5" class="step hidden">
                             <h2 class="text-2xl text-center font-semibold text-indigo-600 mb-6">Paso 5: Certificaciones</h2>
                             <div class="grid gap-8 md:grid-cols-2">
                                 <!-- Nombre de la Institución -->
                                 <div class="w-full">
                                     <label for="institution_name" class="block mb-2 text-sm font-medium text-gray-700">Nombre de la Institución</label>
-                                    <input type="text" id="institution_name" name="institution_name" class="w-full bg-white text-gray-700 placeholder:text-gray-400 text-sm border-2 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200" placeholder="Ejemplo: Universidad Nacional" />
+                                    <input type="text" id="institution_name" name="certificaciones[0][institucion]" class="w-full bg-white text-gray-700 placeholder:text-gray-400 text-sm border-2 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200" placeholder="Ejemplo: Universidad Nacional" />
                                 </div>
                                 <!-- Nombre del Certificado -->
                                 <div class="w-full">
                                     <label for="certificate_name" class="block mb-2 text-sm font-medium text-gray-700">Nombre del Certificado</label>
-                                    <input type="text" id="certificate_name" name="certificate_name" class="w-full bg-white text-gray-700 placeholder:text-gray-400 text-sm border-2 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200" placeholder="Ejemplo: Certificado en Gestión de Proyectos" />
+                                    <input type="text" id="certificate_name" name="certificaciones[0][nombre_institucion]" class="w-full bg-white text-gray-700 placeholder:text-gray-400 text-sm border-2 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200" placeholder="Ejemplo: Certificado en Gestión de Proyectos" />
                                 </div>
                             </div>
                             <div class="mt-8 w-full">
                                 <!-- Fecha de Expedición -->
                                 <label for="issue_date" class="block mb-2 text-sm font-medium text-gray-700">Fecha de Expedición</label>
-                                <input type="date" id="issue_date" name="issue_date" class="w-full bg-white text-gray-700 placeholder:text-gray-400 text-sm border-2 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200" />
+                                <input type="date" id="issue_date" name="certificaciones[0][fecha_expedicion]" class="w-full bg-white text-gray-700 placeholder:text-gray-400 text-sm border-2 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200" />
                             </div>
                         </div>
 
+
                         <!-- Paso 6 -->
-                        <div id="step-6" class="step hidden">
-                            <h2 class="text-2xl text-center font-semibold text-indigo-600 mb-6">Paso 6: Experiencia Laboral</h2>
-                            <div class="grid gap-8 md:grid-cols-2">
-                                <div class="w-full">
-                                    <label for="company" class="block mb-2 text-sm font-medium text-gray-700">Empresa</label>
-                                    <input type="text" id="company" name="company" class="w-full bg-white text-gray-700 placeholder:text-gray-400 text-sm border-2 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200" placeholder="Nombre de la empresa" />
-                                </div>
-                                <div class="w-full">
-                                    <label for="position" class="block mb-2 text-sm font-medium text-gray-700">Cargo</label>
-                                    <input type="text" id="position" name="position" class="w-full bg-white text-gray-700 placeholder:text-gray-400 text-sm border-2 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200" placeholder="Cargo desempeñado" />
-                                </div>
-                            </div>
-                            <div class="grid gap-8 md:grid-cols-2 mt-6">
-                                <div class="w-full">
-                                    <label for="start_date" class="block mb-2 text-sm font-medium text-gray-700">Fecha de Inicio</label>
-                                    <input type="date" id="start_date" name="start_date" class="w-full bg-white text-gray-700 placeholder:text-gray-400 text-sm border-2 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200" />
-                                </div>
-                                <div class="w-full">
-                                    <label for="end_date" class="block mb-2 text-sm font-medium text-gray-700">Fecha de Fin</label>
-                                    <input type="date" id="end_date" name="end_date" class="w-full bg-white text-gray-700 placeholder:text-gray-400 text-sm border-2 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200" />
-                                </div>
-                            </div>
-                            <div class="mt-8 w-full">
-                                <label for="skills" class="block mb-2 text-sm font-medium text-gray-700">Habilidades</label>
-                                <textarea id="skills" name="skills" class="w-full bg-white text-gray-700 placeholder:text-gray-400 text-sm border-2 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200" rows="4" placeholder="Describe tus habilidades adquiridas en esta experiencia"></textarea>
-                            </div>
-                        </div>
+<div id="step-6" class="step hidden">
+    <h2 class="text-2xl text-center font-semibold text-indigo-600 mb-6">Paso 6: Experiencia Laboral</h2>
+    <div class="grid gap-8 md:grid-cols-2">
+        <div class="w-full">
+            <label for="company" class="block mb-2 text-sm font-medium text-gray-700">Empresa</label>
+            <input type="text" id="company" name="experiencia_laboral[0][empresa]" class="w-full bg-white text-gray-700 placeholder:text-gray-400 text-sm border-2 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200" placeholder="Nombre de la empresa" />
+        </div>
+        <div class="w-full">
+            <label for="position" class="block mb-2 text-sm font-medium text-gray-700">Cargo</label>
+            <input type="text" id="position" name="experiencia_laboral[0][cargo]" class="w-full bg-white text-gray-700 placeholder:text-gray-400 text-sm border-2 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200" placeholder="Cargo desempeñado" />
+        </div>
+    </div>
+    <div class="grid gap-8 md:grid-cols-2 mt-6">
+        <div class="w-full">
+            <label for="start_date" class="block mb-2 text-sm font-medium text-gray-700">Fecha de Inicio</label>
+            <input type="date" id="start_date" name="experiencia_laboral[0][fecha_inicio]" class="w-full bg-white text-gray-700 placeholder:text-gray-400 text-sm border-2 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200" />
+        </div>
+        <div class="w-full">
+            <label for="end_date" class="block mb-2 text-sm font-medium text-gray-700">Fecha de Fin</label>
+            <input type="date" id="end_date" name="experiencia_laboral[0][fecha_fin]" class="w-full bg-white text-gray-700 placeholder:text-gray-400 text-sm border-2 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200" />
+        </div>
+    </div>
+    <div class="mt-8 w-full">
+        <label for="skills" class="block mb-2 text-sm font-medium text-gray-700">Habilidades</label>
+        <textarea id="skills" name="experiencia_laboral[0][habilidades]" class="w-full bg-white text-gray-700 placeholder:text-gray-400 text-sm border-2 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200" rows="4" placeholder="Describe tus habilidades adquiridas en esta experiencia"></textarea>
+    </div>
+</div>
+
 
 
                         <div id="step-7" class="step hidden">
@@ -438,9 +440,7 @@
                                     </select>
                                     <input type="text" id="respuesta_1" name="respuesta_1" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3 mt-4 focus:outline-none focus:ring-2 focus:ring-blue-500 @error('respuesta_1') border-red-500 @else border-slate-300 @enderror transition duration-200 ease-in-out hover:bg-gray-50" placeholder="Tu respuesta">
 
-                                    @error('pregunta_1')
-                                        <small class="text-red-500 mt-1 text-sm"><strong>{{ $message }}</strong></small>
-                                    @enderror
+
                                     @error('respuesta_1')
                                         <small class="text-red-500 mt-1 text-sm"><strong>{{ $message }}</strong></small>
                                     @enderror
@@ -456,9 +456,7 @@
                                     </select>
                                     <input type="text" id="respuesta_2" name="respuesta_2" class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border rounded-lg px-4 py-3 mt-4 focus:outline-none focus:ring-2 focus:ring-blue-500 @error('respuesta_2') border-red-500 @else border-slate-300 @enderror transition duration-200 ease-in-out hover:bg-gray-50" placeholder="Tu respuesta">
 
-                                    @error('pregunta_2')
-                                        <small class="text-red-500 mt-1 text-sm"><strong>{{ $message }}</strong></small>
-                                    @enderror
+
                                     @error('respuesta_2')
                                         <small class="text-red-500 mt-1 text-sm"><strong>{{ $message }}</strong></small>
                                     @enderror

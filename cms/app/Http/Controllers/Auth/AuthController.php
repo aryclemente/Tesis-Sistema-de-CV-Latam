@@ -16,6 +16,12 @@ use App\Models\Parroquia;
 use App\Models\Mencion;
 use App\Models\NivelAcademico;
 use App\Models\Idioma;
+use App\Models\ExperienciaLaboral;
+use App\Models\ExperienciaLaboralXHabilidad;
+use App\Models\IdiomaXUsuario;
+use App\Models\Estudio;
+use App\Models\Certificacion;
+
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -110,82 +116,154 @@ class AuthController extends Controller
     }
 
     public function registerVerify(Request $request)
-{
-
-    $request->validate([
-        'first_name' => 'required|string|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/',
-        'last_name' => 'required|string|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/',
-        'cedula' => 'required|unique:users,cedula|regex:/^[0-9]{6,10}$/',
-        'user_name' => 'required|unique:users,user_name',
-        'date_of_birth' => 'required|date|before:today|before_or_equal:today' . now()->subYears(18)->toDateString(),
-        'nacionalidad' => 'required',
-        'password' => 'required|min:8',
-        'password_confirmation' => 'required|same:password',
-        'address' => 'required|string|max:255',
-        'email' => 'required|email|unique:users,email',
-        'respuesta_1' => 'required',
-        'respuesta_2' => 'required',
-        'respuesta_3' => 'required',
-        'respuesta_4' => 'required',
-    ], [
-        'first_name.required' => 'Los nombres son requeridos.',
-        'last_name.required' => 'Los apellidos son requeridos.',
-        'last_name.regex' => 'Apellido no válido.',
-        'user_name.required' => 'El nombre de usuario es requerido.',
-        'user_name.unique' => 'El nombre de usuario ya está en uso.',
-        'date_of_birth.required' => 'La fecha de nacimiento es requerida.',
-        'date_of_birth.before' => 'Debes ser mayor de 18 años.',
-        'date_of_birth.before_or_equal' => 'Debes ser mayor de 18 años.',
-        'nacionalidad.required' => 'La nacionalidad es requerida.',
-        'email.required' => 'El email es requerido.',
-        'email.unique' => 'El email ya está en uso.',
-        'email.email' => 'Por favor, ingresa un email válido.',
-        'cedula.required' => 'La cédula es requerida.',
-        'cedula.unique' => 'La cédula ya está registrada.',
-        'cedula.regex' => 'La cédula debe tener entre 6 y 10 dígitos.',
-        'password.required' => 'La contraseña es requerida.',
-        'password.min' => 'La contraseña debe tener al menos 8 caracteres.',
-        'password_confirmation.required' => 'La confirmación de la contraseña es requerida.',
-        'password_confirmation.same' => 'Las contraseñas no coinciden.',
-        'address.required' => 'La dirección es requerida.',
-        'respuesta_1.required' => 'La respuesta 1 es requerida.',
-        'respuesta_2.required' => 'La respuesta 2 es requerida.',
-        'respuesta_3.required' => 'La respuesta 3 es requerida.',
-        'respuesta_4.required' => 'La respuesta 4 es requerida.',
-    ]);
-
-    // Crear el usuario
-    $user = User::create([
-        'first_name' => $request->first_name,
-        'last_name' => $request->last_name,
-        'date_of_birth' => $request->date_of_birth,
-        'cedula' => $request->cedula,
-        'user_name' => $request->user_name,
-        'email' => $request->email,
-        'password' => bcrypt($request->password),
-        'nacionalidad_idnacionalidad' => $request->nacionalidad,
-        'roles_idroles' => 2,
-    ]);
-
-    // Crear las respuestas de seguridad
-    $preguntas = [
-        $request->pregunta_1 => $request->respuesta_1,
-        $request->pregunta_2 => $request->respuesta_2,
-        $request->pregunta_3 => $request->respuesta_3,
-        $request->pregunta_4 => $request->respuesta_4
-    ];
-
-    foreach ($preguntas as $pregunta_id => $respuesta) {
-        Respuesta::create([
-            'users_idusers' => $user->idusers,
-            'preguntas_idpreguntas' => $pregunta_id,
-            'respuesta' => bcrypt($respuesta),
+    {
+        // Validación de los datos recibidos
+        $request->validate([
+            'first_name' => 'required|string|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/',
+            'last_name' => 'required|string|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/',
+            'cedula' => 'required|unique:users,cedula|regex:/^[0-9]{6,10}$/',
+            'genero' => 'required',
+            'user_name' => 'required|unique:users,user_name',
+            'date_of_birth' => 'required|date|before:today|before_or_equal:today' . now()->subYears(18)->toDateString(),
+            'nacionalidad' => 'required',
+            'password' => 'required|min:8',
+            'password_confirmation' => 'required|same:password',
+            'address' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'estado' => 'required|exists:estados,idestados',
+            'municipio' => 'required|exists:municipios,idmunicipios',
+            'parroquia' => 'required|exists:parroquias,idparroquias',
+            'ciudad' => 'required|exists:cuidades,idcuidades',
+            'experiencia_laboral' => 'required',
+            'habilidades' => 'required',
+            'habilidades.*' => 'exists:habilidades,idhabilidades',
+            'estudios' => 'nullable|array',
+            'estudios.*.estudio_logrado' => 'required|string',
+            'estudios.*.niveles_academicos_idniveles_academicos' => 'required|exists:niveles_academicos,idniveles_academicos',
+            'estudios.*.menciones_idmenciones' => 'required|exists:menciones,idmenciones',
+            'idiomas' => 'nullable|array',
+            'idiomas.*.idioma_id' => 'required|exists:idiomas,ididiomas',
+            'idiomas.*.nivel_idioma' => 'required|string',
+            'idiomas' => 'array', // Aseguramos que se reciban como array
+            'idiomas.*' => 'exists:idiomas,ididiomas', // Verificamos que los idiomas sean válidos
         ]);
+
+        DB::beginTransaction(); // Iniciar transacción para garantizar que todo se guarde correctamente
+
+        try {
+            // Crear el usuario
+            $user = User::create([
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'date_of_birth' => $request->date_of_birth,
+                'cedula' => $request->cedula,
+                'genero' => $request->genero,
+                'user_name' => $request->user_name,
+                'email' => $request->email,
+                'password' => bcrypt($request->password),
+                'nacionalidad_idnacionalidad' => $request->nacionalidad,
+                'roles_idroles' => 2,
+            ]);
+
+            // Mostrar el "token" o ID del usuario guardado
+            $userToken = $user->idusers; // Puedes usar el ID del usuario como "token"
+
+            // Asociar estado, municipio, parroquia y ciudad al usuario
+            $user->estado()->associate($request->estado);
+            $user->municipio()->associate($request->municipio);
+            $user->parroquia()->associate($request->parroquia);
+            $user->ciudad()->associate($request->ciudad);
+            $user->save();
+
+            // Guardar las respuestas de seguridad
+            $preguntas = [
+                $request->pregunta_1 => $request->respuesta_1,
+                $request->pregunta_2 => $request->respuesta_2,
+                $request->pregunta_3 => $request->respuesta_3,
+                $request->pregunta_4 => $request->respuesta_4
+            ];
+
+            foreach ($preguntas as $pregunta_id => $respuesta) {
+                Respuesta::create([
+                    'users_idusers' => $user->idusers,
+                    'preguntas_idpreguntas' => $pregunta_id,
+                    'respuesta' => bcrypt($respuesta),
+                ]);
+            }
+
+            // Guardar la experiencia laboral
+            if ($request->has('experiencia_laboral')) {
+                foreach ($request->experiencia_laboral as $experiencia) {
+                    // Crear la experiencia laboral
+                    $experiencia_laboral = ExperienciaLaboral::create([
+                        'empresa' => $experiencia['empresa'],
+                        'cargo' => $experiencia['cargo'],
+                        'fecha_inicio' => $experiencia['fecha_inicio'],
+                        'fecha_fin' => $experiencia['fecha_fin'],
+                        'user_id' => $user->idusers,  // Asocia el usuario a la experiencia laboral
+                    ]);
+
+                    // Relacionar las habilidades con la experiencia laboral
+                    if (isset($experiencia['habilidades'])) {
+                        foreach ($experiencia['habilidades'] as $habilidad_id) {
+                            ExperienciaLaboralXHabilidad::create([
+                                'experiencia_laboral_id' => $experiencia_laboral->idexperiencias_laraborales,
+                                'habilidad_id' => $habilidad_id,
+                            ]);
+                        }
+                    }
+                }
+            }
+
+            // Guardar los estudios
+            if ($request->has('estudios_logrados')) {
+                Estudio::create([
+                    'estudio_logrado' => $request->estudios_logrados,
+                    'user_id' => $user->idusers,
+                    'niveles_academicos_idniveles_academicos' => $request->niveles_academicos_idniveles_academicos,
+                    'menciones_idmenciones' => $request->menciones_idmenciones,
+                ]);
+            }
+
+            // Guardar los idiomas seleccionados
+            if ($request->has('idiomas')) {
+                foreach ($request->idiomas as $idiomaId) {
+                    IdiomaXUsuario::create([
+                        'idioma_id' => $idiomaId,
+                        'user_id' => $user->idusers,
+                    ]);
+                }
+            }
+
+            // Guardar certificaciones
+            if ($request->has('certificaciones')) {
+                foreach ($request->certificaciones as $certificacion) {
+                    Certificacion::create([
+                        'institucion' => $certificacion['institucion'],
+                        'nombre_institucion' => $certificacion['nombre_institucion'],
+                        'fecha_expedicion' => $certificacion['fecha_expedicion'],
+                        'user_id' => $user->idusers,
+                    ]);
+                }
+            }
+
+            // Confirmar la transacción si todo se guardó correctamente
+            DB::commit();
+
+            // Mostrar el token generado (ID del usuario en este caso)
+            return redirect()->route('login')->with('success', 'Usuario registrado exitosamente. Token generado: ' . $userToken);
+
+        } catch (\Exception $e) {
+            // En caso de error, deshacer la transacción
+            DB::rollBack();
+            return redirect()->back()->withErrors(['error' => 'Ocurrió un error al registrar el usuario. Intenta de nuevo.']);
+        }
     }
 
-    // Redirigir al login con un mensaje de éxito
-    return redirect()->route('login')->with('success', 'Usuario registrado exitosamente.');
-}
+
+
+
+
 
 public function loginVerify(Request $request)
 {
