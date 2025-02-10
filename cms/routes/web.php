@@ -29,6 +29,11 @@ Route::get('Contactanos', [CommentController::class, 'showForm'])->name('Contact
 
 Route::post('Contactanos', [CommentController::class, 'store'])->name('store.contacto');
 
+// En routes/web.php
+
+Route::get('get-ciudades/{estadoId}', [AuthController::class, 'getCiudades']);
+Route::get('get-municipios/{ciudadId}', [AuthController::class, 'getMunicipios']);
+Route::get('get-parroquias/{municipioId}', [AuthController::class, 'getParroquias']);
 
 // AUTH
 Route::prefix('auth')->group(function () {

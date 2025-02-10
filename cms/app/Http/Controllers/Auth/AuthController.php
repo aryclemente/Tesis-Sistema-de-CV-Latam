@@ -79,6 +79,35 @@ class AuthController extends Controller
             'idiomas'
         ));
     }
+    // Método para obtener las ciudades según el estado
+    public function getCiudades($estadoId)
+    {
+        // Obtenemos las ciudades relacionadas con el estado
+        $ciudades = Ciudad::where('estados_idestados', $estadoId)->get();
+
+        // Devolvemos las ciudades en formato JSON
+        return response()->json($ciudades);
+    }
+
+    // Método para obtener los municipios según la ciudad
+    public function getMunicipios($ciudadId)
+    {
+        // Obtenemos los municipios relacionados con la ciudad
+        $municipios = Municipio::where('estados_idestados', $ciudadId)->get();
+
+        // Devolvemos los municipios en formato JSON
+        return response()->json($municipios);
+    }
+
+    // Método para obtener las parroquias según el municipio
+    public function getParroquias($municipioId)
+    {
+        // Obtenemos las parroquias relacionadas con el municipio
+        $parroquias = Parroquia::where('municipios_idmunicipios', $municipioId)->get();
+
+        // Devolvemos las parroquias en formato JSON
+        return response()->json($parroquias);
+    }
 
     public function registerVerify(Request $request)
 {

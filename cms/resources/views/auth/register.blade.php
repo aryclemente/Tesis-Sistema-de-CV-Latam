@@ -202,11 +202,12 @@
                                     <label for="estado" class="block mb-2 text-sm font-medium text-gray-700">Estado</label>
                                     <select id="estado" name="estado_id" class="w-full bg-white text-gray-700 placeholder:text-gray-400 text-sm border-2 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200">
                                         <option value="" selected>Selecciona estado</option>
-                                        {{-- @foreach ($estados as $items)
-                                            <option value="{{ $items->id }}" @if (old('estado_id') == $items->id) selected @endif>
-                                                {{ $items->estado }}
-                                            </option>
-                                        @endforeach --}}
+                                        @foreach ($estados as $items)
+                                        <option value="{{ $items->idestados }}" @if (old('estado_id') == $items->idestados) selected @endif>
+                                            {{ $items->estado }}
+                                        </option>
+                                    @endforeach
+
                                     </select>
                                 </div>
 
@@ -234,6 +235,82 @@
                                 </div>
                             </div>
                         </div>
+                        <script>
+                            // Al cambiar el estado
+                            document.getElementById('estado').addEventListener('change', function() {
+                                var estadoId = this.value;
+
+                                // Solo realiza la petición si se ha seleccionado un estado
+                                if (estadoId) {
+                                    // Solicitar las ciudades
+                                    fetch(`/get-ciudades/${estadoId}`)
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            var ciudadSelect = document.getElementById('ciudad');
+                                            ciudadSelect.innerHTML = '<option value="">Selecciona ciudad</option>'; // Limpiar ciudades anteriores
+
+                                            // Iteramos por cada ciudad y la agregamos como opción
+                                            data.forEach(function(ciudad) {
+                                                var option = document.createElement('option');
+                                                option.value = ciudad.idcuidades;
+                                                option.textContent = ciudad.ciudad;
+                                                ciudadSelect.appendChild(option);
+                                            });
+                                        });
+
+                                    // Solicitar los municipios
+                                    fetch(`/get-municipios/${estadoId}`)
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            var municipioSelect = document.getElementById('municipio');
+                                            municipioSelect.innerHTML = '<option value="">Selecciona municipio</option>'; // Limpiar municipios anteriores
+
+                                            // Iteramos por cada municipio y lo agregamos como opción
+                                            data.forEach(function(municipio) {
+                                                var option = document.createElement('option');
+                                                option.value = municipio.idmunicipios;
+                                                option.textContent = municipio.municipio;
+                                                municipioSelect.appendChild(option);
+                                            });
+                                        });
+
+                                } else {
+                                    // Limpiar los selectores si no hay estado seleccionado
+                                    document.getElementById('ciudad').innerHTML = '<option value="">Selecciona ciudad</option>';
+                                    document.getElementById('municipio').innerHTML = '<option value="">Selecciona municipio</option>';
+                                    document.getElementById('parroquia').innerHTML = '<option value="">Selecciona parroquia</option>';
+                                }
+                            });
+
+                            // Al cambiar el municipio
+                            document.getElementById('municipio').addEventListener('change', function() {
+                                var municipioId = this.value;
+
+                                // Solo realiza la petición si se ha seleccionado un municipio
+                                if (municipioId) {
+                                    fetch(`/get-parroquias/${municipioId}`)
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            var parroquiaSelect = document.getElementById('parroquia');
+                                            parroquiaSelect.innerHTML = '<option value="">Selecciona parroquia</option>'; // Limpiar parroquias anteriores
+
+                                            // Iteramos por cada parroquia y la agregamos como opción
+                                            data.forEach(function(parroquia) {
+                                                var option = document.createElement('option');
+                                                option.value = parroquia.idparroquias;
+                                                option.textContent = parroquia.parroquia;
+                                                parroquiaSelect.appendChild(option);
+                                            });
+                                        });
+                                } else {
+                                    document.getElementById('parroquia').innerHTML = '<option value="">Selecciona parroquia</option>';
+                                }
+                            });
+                        </script>
+
+
+
+
 
                         <!-- Paso 4 -->
                         <div id="step-4" class="step hidden">
@@ -493,6 +570,9 @@
     }
 
     showStep(currentStep);
+
+
+
 
     document.getElementById("togglePassword").addEventListener("click", function() {
         const passwordField = document.getElementById("password");
