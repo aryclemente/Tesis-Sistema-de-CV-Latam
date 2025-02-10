@@ -6,18 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ciudad extends Model
 {
-    // Nombre de la tabla en la base de datos
-    protected $table = 'cuidades';
+    // Especifica el nombre de la tabla en la base de datos
+    protected $table = 'cuidades'; // Cambia a 'ciudades' si es necesario
 
-    // Nombre de la clave primaria
+    // Especifica la clave primaria
     protected $primaryKey = 'idcuidades';
 
-    // Desactivar los timestamps si no los estás utilizando
+    // Desactiva timestamps si la tabla no tiene created_at y updated_at
     public $timestamps = false;
 
     // Columnas que pueden ser asignadas masivamente
     protected $fillable = [
-        'cuidad',
+        'cuidad',  // Cambia a 'ciudad' si es necesario
         'capital',
         'estados_idestados'
     ];

@@ -8,11 +8,11 @@ use App\Models\Nacionalidad;
 use App\Models\Pregunta;
 use App\Models\Respuesta;
 use App\Models\Role;
-
+use App\Models\Ciudad;
 use App\Models\Estado;
 use App\Models\Municipio;
 use App\Models\Parroquia;
-use App\Models\Ciudad;
+
 use App\Models\Mencion;
 use App\Models\NivelAcademico;
 use App\Models\Idioma;
@@ -56,7 +56,8 @@ class AuthController extends Controller
         $estados = Estado::all();
         $municipios = Municipio::all();
         $parroquias = Parroquia::all();
-        // $ciudades = Ciudad::all();
+        $cuidades = Ciudad::all();
+
 
         // Obtener las menciones y niveles académicos
         $menciones = Mencion::all();
@@ -72,7 +73,7 @@ class AuthController extends Controller
             'estados',
             'municipios',
             'parroquias',
-            // 'ciudades',
+            'cuidades',
             'menciones',
             'nivelesAcademicos',
             'idiomas'
