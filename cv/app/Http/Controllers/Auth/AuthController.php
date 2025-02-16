@@ -152,7 +152,7 @@ public function loginVerify(Request $request)
         session(['show_message' => "Bienvenido, {$user->first_name} {$user->last_name}!"]);
 
         if ($user->roles_idroles === 2) {
-            return redirect()->route('publications')->with('success', "Bienvenido, {$user->first_name} {$user->last_name}. Accediste como Vacante.");
+            return redirect()->route('cv')->with('success', "Bienvenido, {$user->first_name} {$user->last_name}. Accediste como Vacante.");
         }
 
         return redirect()->route('dashboard')->with('success', "Bienvenido, {$user->first_name} {$user->last_name}! Accediste como Administrador.");
@@ -345,6 +345,11 @@ public function loginVerify(Request $request)
             'max:255',
             Rule::unique('users', 'email')->ignore(Auth::user()->idusers, 'idusers'),
         ],
+        'phone' => [
+            'nullable',
+            Rule::unique('users', 'phone')->ignore(Auth::user()->idusers, 'idusers'),
+        ],
+
     ], [
         'user_name.unique' => 'El nombre de usuario ya está en uso.',
         'email.unique' => 'El correo electrónico ya está en uso.',
@@ -355,6 +360,7 @@ public function loginVerify(Request $request)
     $user = Auth::user();
     $user->user_name = $request->user_name;
     $user->email = $request->email;
+    $user->phone = $request->phone;
     $user->save();
 
     // Establecer el mensaje de éxito en la sesión
@@ -362,7 +368,7 @@ public function loginVerify(Request $request)
 
     // Redirigir según el rol del usuario
     if ($user->roles_idroles === 2) { // Si el usuario es un Publicador (roles_idroles = 2)
-        return redirect()->route('publications')->with('success', "Actualizaste tu perfil, {$user->first_name} {$user->last_name}");
+        return redirect()->route('cv')->with('success', "Actualizaste tu perfil, {$user->first_name} {$user->last_name}");
     }
 
     // Si no es Publicador, es Administrador (asumimos roles_idroles = 1 para Admin)

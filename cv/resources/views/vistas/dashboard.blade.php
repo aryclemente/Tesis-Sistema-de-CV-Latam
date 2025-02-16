@@ -45,7 +45,6 @@
                             </div>
                             <div class="h-1 w-16 bg-gray-200 mb-6"></div>
                             <p class="text-lg">Total de páginas creadas en la plataforma, actualizándose conforme se añaden nuevas.</p>
-
                         </div>
 
                         <div

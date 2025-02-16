@@ -58,8 +58,8 @@
                                     <label for="user_name" class="block text-gray-700 font-medium">Nombre de Usuario</label>
                                     <input type="text" id="user_name" name="user_name"
                                         value="{{ old('user_name', Auth::user()->user_name) }}"
-                                        class="w-full mt-2 px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500
-                                        @error('user_name') border-red-500 focus:ring-red-500 @enderror">
+                                        class="w-full mt-2 px-4 py-3 border  rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500
+                                        @error('user_name') border-red-500  @enderror">
                                     @error('user_name')
                                         <span class="text-red-500 text-sm">{{ $message }}</span>
                                     @enderror
@@ -85,15 +85,36 @@
                                     <label for="email" class="block text-gray-700 font-medium">Correo Electrónico</label>
                                     <input type="email" id="email" name="email"
                                         value="{{ old('email', Auth::user()->email) }}"
-                                        class="w-full mt-2 px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500
-                                        @error('email') border-red-500 focus:ring-red-500 @enderror">
+                                        class="w-full mt-2 px-4 py-3 border  rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500
+                                        @error('email') border-red-500  @enderror">
                                     @error('email')
                                         <span class="text-red-500 text-sm">{{ $message }}</span>
                                     @enderror
                                 </div>
 
                             </div>
-                            
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 ">
+                                <div>
+                                    <label for="gender" class="block text-gray-700 font-medium">Genero</label>
+                                    <input type="text" id="gender" name="gender"
+                                    value="{{ old('gender', Auth::user()->gender)}}"
+                                    class="w-full mt-2 px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 bg-gray-100 cursor-not-allowed" disabled
+                                    >
+                                </div>
+                                <div>
+                                    <label for="gender" class="block text-gray-700 font-medium">Telefono</label>
+                                    <input type="text" id="gender" name="phone"
+                                    value="{{ old('gender', Auth::user()->phone)}}"
+                                    maxlength="11"
+                                    pattern="[0-9+ -]*"
+                                    oninput="this.value = this.value.replace(/[^0-9+ -]/g, '')"
+                                    class="w-full mt-2 px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 bg-gray-100 "
+                                    >
+                                </div>
+
+                            </div>
+
                             <div class="mt-8">
                                 <button type="submit" class="px-6 py-3 bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 text-white font-semibold rounded-lg shadow-lg hover:from-blue-600 hover:to-blue-800 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full md:w-auto mb-6">
                                     Guardar Cambios

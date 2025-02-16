@@ -32,7 +32,7 @@
                 <nav class="flex flex-col space-y-2 p-4 text-gray-300">
                   @if (auth()->user()->roles_idroles == 1)
                     <a href="{{ route('dashboard') }}"
-                        class="flex items-center space-x-3 bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition duration-300 shadow-md hover:shadow-lg hover:shadow-gray-900/50 transform transition duration-300 hover:-translate-y-1">
+                        class="flex items-center space-x-3 bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-700  shadow-md hover:shadow-lg hover:shadow-gray-900/50 transform transition duration-300 hover:-translate-y-1">
                         <div class="bg-gray-700 p-2 rounded-full hover:bg-gray-600 transition duration-300">
                             <i class="fas fa-tachometer-alt text-white"></i>
                         </div>
@@ -42,7 +42,7 @@
 
                     @if (auth()->user()->roles_idroles == 1)
                     <a href="{{ route('users.index') }}"
-                        class="flex items-center space-x-3 bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition duration-300 shadow-md hover:shadow-lg hover:shadow-gray-900/50 transform transition duration-300 hover:-translate-y-1">
+                        class="flex items-center space-x-3 bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-700  shadow-md hover:shadow-lg hover:shadow-gray-900/50 transform transition duration-300 hover:-translate-y-1">
                         <div class="bg-gray-700 p-2 rounded-full hover:bg-gray-600 transition duration-300">
                             <i class="fas fa-user-friends text-white"></i>
                         </div>
@@ -52,7 +52,7 @@
 
                     @if (auth()->user()->roles_idroles == 1)
                     <a href="{{ route('pages.index') }}"
-                        class="flex items-center space-x-3 bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition duration-300 shadow-md hover:shadow-lg hover:shadow-gray-900/50 transform transition duration-300 hover:-translate-y-1">
+                        class="flex items-center space-x-3 bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-700  shadow-md hover:shadow-lg hover:shadow-gray-900/50 transform transition duration-300 hover:-translate-y-1">
                         <div class="bg-gray-700 p-2 rounded-full hover:bg-gray-600 transition duration-300">
                             <i class="fas fa-sitemap text-white"></i>
                         </div>
@@ -60,13 +60,24 @@
                     </a>
                     @endif
 
+                    @if (auth()->user()->roles_idroles == 1)
                     <a href="{{ route('publications') }}"
-                    class="flex items-center space-x-3 bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition duration-300 shadow-md hover:shadow-lg hover:shadow-gray-900/50 transform transition duration-300 hover:-translate-y-1">
+                    class="flex items-center space-x-3 bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-700 shadow-md hover:shadow-lg hover:shadow-gray-900/50 transform transition duration-300 hover:-translate-y-1">
                     <div class="bg-gray-700 p-2 rounded-full hover:bg-gray-600 transition duration-300">
                         <i class="fas fa-blog text-white"></i>
                     </div>
                     <span class="font-medium">Blog</span>
                     </a>
+                    @endif
+
+                    <a href="{{ route('cv') }}"
+                        class="flex items-center space-x-3 bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-700 shadow-md hover:shadow-lg hover:shadow-gray-900/50 transform transition duration-300 hover:-translate-y-1">
+                        <div class="bg-gray-700 p-2 rounded-full hover:bg-gray-600 transition duration-300">
+                            <i class="fas fa-file-alt text-white"></i> <!-- Ícono cambiado -->
+                        </div>
+                        <span class="font-medium">Curriculum Vitae</span>
+                    </a>
+
 
                 </nav>
             </form>

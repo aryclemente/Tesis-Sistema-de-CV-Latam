@@ -2136,7 +2136,7 @@ return new class extends Migration
             $table->date('date_of_birth')->nullable();
             $table->integer('cedula')->nullable()->unique();
             $table->string('user_name', 45)->nullable()->unique();
-            $table->enum('gender', ['male' , 'female'])->nullable;
+            $table->enum('gender', ['Masculino' , 'Femenino'])->nullable;
             $table->string('phone')->nullable()->unique();
             $table->string('email', 45)->nullable()->unique();
             $table->string('facebook', 45)->nullable();
@@ -2156,6 +2156,9 @@ return new class extends Migration
             $table->foreignId('experiencia_laboral_id')->nullable()
                 ->constrained('experiencias_laborales')
                 ->onDelete('cascade');
+                $table->foreignId('ciudad_id')->nullable()
+                ->constrained('ciudades')
+                ->onDelete('cascade');
         });
 
         DB::table('users')->insert([
@@ -2165,7 +2168,7 @@ return new class extends Migration
                 'date_of_birth' => '2003-12-31',
                 'cedula' => 30551898,
                 'user_name' => 'Admin',
-                'gender' => 'male',
+                'gender' => 'Masculino',
                 'email' => 'isaac.cattoni@gmail.com',
                 'password' => bcrypt('password12345'),
                 'nacionalidad_idnacionalidad' => 1,
@@ -2177,7 +2180,7 @@ return new class extends Migration
                 'date_of_birth' => '2001-10-09',
                 'cedula' => 28304435,
                 'user_name' => 'aryc',
-                'gender' => 'female',
+                'gender' => 'Femenino',
                 'email' => 'hello.aryc@gmail.com',
                 'password' => bcrypt('123456789'),
                 'nacionalidad_idnacionalidad' => 2,
@@ -2255,6 +2258,7 @@ return new class extends Migration
             $table->string('idioma', 45);
             $table->string('nivel', 45);
         });
+        
         DB::table('idiomas')->insert([
             // Español
             ['ididiomas' => 1, 'idioma' => 'Español', 'nivel' => 'Básico'],

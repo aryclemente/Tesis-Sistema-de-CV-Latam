@@ -105,8 +105,8 @@
                                         <div class="relative">
                                             <select id="gender" name="gender" class="w-full bg-white text-slate-700 text-sm border-2 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200">
                                                 <option value="" selected disabled>Seleccione su género</option>
-                                                <option value="male">Masculino</option>
-                                                <option value="female">Femenino</option>
+                                                <option value="Masculino">Masculino</option>
+                                                <option value="Femenino">Femenino</option>
                                             </select>
 
                                         </div>

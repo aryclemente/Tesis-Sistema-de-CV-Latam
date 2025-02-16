@@ -14,6 +14,7 @@ class DashboardController extends Controller
         if (Auth::user()->roles_idroles !== 1) {
             return redirect()->route('login')->with('error', 'No tienes permiso para acceder al Dashboard.');
         }
+        // esta en mi permisologia :D
 
         // Contar publicaciones y páginas solo si el rol es correcto
         $publicationCount = Publication::count();

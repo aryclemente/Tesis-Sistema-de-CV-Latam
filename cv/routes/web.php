@@ -67,6 +67,10 @@ Route::middleware('auth')->group(function () {
     })->name('dashboard');
 });
 
+Route::get('cv', function (){
+    return view('vistas.cv');
+})->name('cv');
+
 // Profile
 Route::get('edit-profile', function () {
     return view('vistas.edit-profile');
