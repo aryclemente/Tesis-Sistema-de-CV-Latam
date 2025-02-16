@@ -93,13 +93,7 @@
                                 </div>
 
                             </div>
-                            <div class="mb-8">
-                                <label for="address" class="block text-gray-700 font-medium">Dirección</label>
-                                <textarea id="address" name="address"
-                                    class="w-full mt-2 px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500">
-                                    {{ old('address', Auth::user()->address ?? 'No disponible') }}
-                                </textarea>
-                            </div>
+                            
                             <div class="mt-8">
                                 <button type="submit" class="px-6 py-3 bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 text-white font-semibold rounded-lg shadow-lg hover:from-blue-600 hover:to-blue-800 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full md:w-auto mb-6">
                                     Guardar Cambios

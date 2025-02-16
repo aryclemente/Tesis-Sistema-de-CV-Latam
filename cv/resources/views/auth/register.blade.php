@@ -100,19 +100,31 @@
                                             </p>
                                         @enderror
                                     </div>
-
-
                                     <div class="w-full">
-                                        <label for="user_name" class="block mb-2 text-sm font-medium text-slate-700">Nombre de usuario</label>
-                                        <input type="text" id="user_name" name="user_name"
-                                            class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border-2 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200
-                                            @error('user_name') border-red-500 @else border-slate-300 @enderror"
-                                            placeholder="Nombre de usuario" />
-                                        @error('user_name')
-                                            <small class="text-red-500 mt-1 text-sm">
-                                                <strong>{{ $message }}</strong>
-                                            </small>
-                                        @enderror
+                                        <label for="gender" class="block mb-2 text-sm font-medium text-slate-700">Género</label>
+                                        <div class="relative">
+                                            <select id="gender" name="gender" class="w-full bg-white text-slate-700 text-sm border-2 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200">
+                                                <option value="" selected disabled>Seleccione su género</option>
+                                                <option value="male">Masculino</option>
+                                                <option value="female">Femenino</option>
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="w-full">
+                                    <label for="phone" class="block mb-2 text-sm font-medium text-slate-700">Teléfono</label>
+                                    <div class="relative">
+                                        <input type="tel" id="phone" name="phone"
+                                            class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border-2 rounded-lg px-4 py-3 pr-10 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200"
+                                            placeholder="Ingrese su número de teléfono"
+                                            maxlength="11"
+                                            pattern="[0-9+ -]*"
+                                            oninput="this.value = this.value.replace(/[^0-9+ -]/g, '')"
+                                        />
+                                        <span class="absolute inset-y-0 right-3 flex items-center pointer-events-none">
+                                            <i class="fas fa-phone text-slate-400"></i>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -122,13 +134,25 @@
                                 <h2 class="text-2xl text-center m-2 border-b-4 border-indigo-600 font-semibold mb-6">Paso 2</h2>
 
                                 <div class="grid gap-8 md:grid-cols-2">
-                                    <div class="w-full">
+                                    {{-- <div class="w-full">
                                         <label for="address" class="block mb-2 text-sm font-medium text-slate-700">Dirección</label>
                                         <textarea id="address" name="address"
                                             class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border-2 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200
                                             @error('address') border-red-500 @else border-slate-300 @enderror"
                                             placeholder="Dirección"></textarea>
                                         @error('address')
+                                            <small class="text-red-500 mt-1 text-sm">
+                                                <strong>{{ $message }}</strong>
+                                            </small>
+                                        @enderror
+                                    </div> --}}
+                                    <div class="w-full">
+                                        <label for="user_name" class="block mb-2 text-sm font-medium text-slate-700">Nombre de usuario</label>
+                                        <input type="text" id="user_name" name="user_name"
+                                            class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border-2 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200
+                                            @error('user_name') border-red-500 @else border-slate-300 @enderror"
+                                            placeholder="Nombre de usuario" />
+                                        @error('user_name')
                                             <small class="text-red-500 mt-1 text-sm">
                                                 <strong>{{ $message }}</strong>
                                             </small>

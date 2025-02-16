@@ -60,7 +60,7 @@ class AuthController extends Controller
         'nacionalidad' => 'required',
         'password' => 'required|min:8',
         'password_confirmation' => 'required|same:password',
-        'address' => 'required|string|max:255',
+
         'email' => 'required|email|unique:users,email',
         'respuesta_1' => 'required',
         'respuesta_2' => 'required',
@@ -100,7 +100,8 @@ class AuthController extends Controller
         'date_of_birth' => $request->date_of_birth,
         'cedula' => $request->cedula,
         'user_name' => $request->user_name,
-        'address' => $request->address,
+        'gender' => $request->gender,
+        'phone' => $request->phone,
         'email' => $request->email,
         'facebook' => $request->facebook,
         'instagram' => $request->instagram,
@@ -151,7 +152,7 @@ public function loginVerify(Request $request)
         session(['show_message' => "Bienvenido, {$user->first_name} {$user->last_name}!"]);
 
         if ($user->roles_idroles === 2) {
-            return redirect()->route('publications')->with('success', "Bienvenido, {$user->first_name} {$user->last_name}. Accediste como Publicador.");
+            return redirect()->route('publications')->with('success', "Bienvenido, {$user->first_name} {$user->last_name}. Accediste como Vacante.");
         }
 
         return redirect()->route('dashboard')->with('success', "Bienvenido, {$user->first_name} {$user->last_name}! Accediste como Administrador.");
@@ -337,7 +338,7 @@ public function loginVerify(Request $request)
             'max:255',
             Rule::unique('users', 'user_name')->ignore(Auth::user()->idusers, 'idusers'),
         ],
-        'address' => 'nullable|string|max:255',
+
         'email' => [
             'nullable',
             'email',
@@ -353,7 +354,6 @@ public function loginVerify(Request $request)
     // Actualiza el perfil del usuario
     $user = Auth::user();
     $user->user_name = $request->user_name;
-    $user->address = $request->address;
     $user->email = $request->email;
     $user->save();
 
