@@ -18,10 +18,14 @@ class Certificacion extends Model
         'user_id',
     ];
 
+    // Deshabilitar los timestamps
+    public $timestamps = false;
+
     // Relación con el modelo User
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'idusers');
     }
 }
+
 

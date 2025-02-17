@@ -75,5 +75,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comment::class, 'users_idusers', 'idusers');
     }
+    // En el modelo User
+public function idiomas()
+{
+    return $this->belongsToMany(Idioma::class, 'user_idiomas', 'user_id', 'idioma_id');
+}
+
 
 }

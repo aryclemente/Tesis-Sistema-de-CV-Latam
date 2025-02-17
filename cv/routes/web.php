@@ -15,6 +15,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\DireccionController;
 
 
 Route::get('/', [HomeController::class, 'showHomePage'])->name('HomePage');
@@ -119,13 +120,24 @@ Route::delete('/posts/{id}', [PostController::class, 'destroy'])->name('posts.de
 
 
 // cv
-
-use App\Http\Controllers\DireccionController;
-
 Route::get('/cv/direccion', [DireccionController::class, 'create'])->name('cv.direccion.create');
 Route::post('/cv/direccion/store', [DireccionController::class, 'store'])->name('cv.direccion.store');
-
 Route::get('/cv/municipios/{estado_id}', [DireccionController::class, 'getMunicipios']);
 Route::get('/cv/parroquias/{municipio_id}', [DireccionController::class, 'getParroquias']);
 Route::get('/cv/ciudades/{estado_id}', [DireccionController::class, 'getCiudades']);
+
+use App\Http\Controllers\CertificacionController;
+
+Route::get('/cv/certificaciones', [CertificacionController::class, 'create'])->name('certificaciones.create');
+Route::post('/cv/certificaciones', [CertificacionController::class, 'store'])->name('certificaciones.store');
+
+use App\Http\Controllers\IdiomaController;
+
+// Ruta para mostrar los idiomas disponibles
+Route::get('/cv/idiomas', [IdiomaController::class, 'showIdiomas'])->name('cv.idiomas.show');
+
+// Ruta para almacenar los idiomas seleccionados
+Route::post('/cv/idiomas', [IdiomaController::class, 'storeIdiomas'])->name('cv.idiomas.store');
+
+
 

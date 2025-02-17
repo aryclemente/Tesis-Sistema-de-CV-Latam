@@ -39,7 +39,7 @@ class DireccionController extends Controller
             ]
         );
 
-        return redirect()->back()->with('success', 'Dirección guardada correctamente.');
+        return redirect()->route('cv')->with('success', 'Dirección guardada correctamente.');
     }
 
     public function getMunicipios($estado_id)

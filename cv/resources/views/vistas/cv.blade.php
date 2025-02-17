@@ -62,7 +62,7 @@
                         </div>
                         <div class="h-1 w-16 bg-gray-200 mb-6"></div>
                         <p class="text-lg mb-4">Especifica los idiomas que dominas y tu nivel de competencia.</p>
-                        <a href="#">
+                        <a href="{{ route('cv.idiomas.show')}}">
                             <button class="mt-4 bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700">
                                 Registrar
                             </button>
@@ -78,7 +78,7 @@
                         </div>
                         <div class="h-1 w-16 bg-gray-200 mb-6"></div>
                         <p class="text-lg mb-4">Registra certificaciones y cursos relevantes para tu carrera.</p>
-                        <a href="#">
+                        <a href="{{ route('certificaciones.create')}}">
                             <button class="mt-4 bg-yellow-600 text-white py-2 px-4 rounded-md hover:bg-yellow-700">
                                 Registrar
                             </button>
