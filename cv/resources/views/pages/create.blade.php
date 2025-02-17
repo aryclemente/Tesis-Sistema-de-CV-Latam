@@ -24,7 +24,7 @@
             <!-- Profile Section -->
             <div class="flex items-center space-x-4 mb-12">
                 <x-profile />
-            </div>
+            </div>  
 
             <!-- Page Form -->
             <div class="container mx-auto p-6 bg-white rounded-lg shadow-lg">

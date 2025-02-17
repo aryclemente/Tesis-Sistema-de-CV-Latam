@@ -16,7 +16,8 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\DireccionController;
-
+use App\Http\Controllers\IdiomaController;
+use App\Http\Controllers\CertificacionController;
 
 Route::get('/', [HomeController::class, 'showHomePage'])->name('HomePage');
 
@@ -126,12 +127,8 @@ Route::get('/cv/municipios/{estado_id}', [DireccionController::class, 'getMunici
 Route::get('/cv/parroquias/{municipio_id}', [DireccionController::class, 'getParroquias']);
 Route::get('/cv/ciudades/{estado_id}', [DireccionController::class, 'getCiudades']);
 
-use App\Http\Controllers\CertificacionController;
-
 Route::get('/cv/certificaciones', [CertificacionController::class, 'create'])->name('certificaciones.create');
 Route::post('/cv/certificaciones', [CertificacionController::class, 'store'])->name('certificaciones.store');
-
-use App\Http\Controllers\IdiomaController;
 
 // Ruta para mostrar los idiomas disponibles
 Route::get('/cv/idiomas', [IdiomaController::class, 'showIdiomas'])->name('cv.idiomas.show');

@@ -35,6 +35,6 @@ class IdiomaController extends Controller
         $user->idiomas()->sync($request->idiomas); // Esto guarda los idiomas seleccionados en la tabla pivot
 
         // Redirigir al usuario con un mensaje de éxito
-        return redirect()->back()->with('success', 'Idiomas actualizados correctamente.');
+        return redirect()->route('cv')->with('success', 'Idiomas registrados correctamente.');
     }
 }

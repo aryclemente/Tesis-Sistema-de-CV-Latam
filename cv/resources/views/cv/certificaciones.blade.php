@@ -54,10 +54,6 @@
                                    class="mt-2 p-4 w-full rounded-lg border-2 border-gray-300 focus:ring-2 focus:ring-blue-500 transition duration-300 shadow-lg hover:border-blue-600"
                                    max="{{ \Carbon\Carbon::now('America/Caracas')->format('Y-m-d') }}">
                         </div>
-
-
-
-
                         <!-- Botón de Enviar -->
                         <div class="flex justify-center mt-6">
                             <button type="submit" class="bg-blue-600 text-white py-3 px-12 rounded-full hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 transition duration-300 transform hover:scale-105">
