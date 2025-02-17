@@ -116,3 +116,16 @@ Route::get('/post/{id}', [PostController::class, 'show'])->name('posts.show');
 Route::get('post/{id}/edit', [PostController::class, 'edit'])->name('posts.edit');
 Route::put('post/{id}', [PostController::class, 'update'])->name('posts.update');
 Route::delete('/posts/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
+
+
+// cv
+
+use App\Http\Controllers\DireccionController;
+
+Route::get('/cv/direccion', [DireccionController::class, 'create'])->name('cv.direccion.create');
+Route::post('/cv/direccion/store', [DireccionController::class, 'store'])->name('cv.direccion.store');
+
+Route::get('/cv/municipios/{estado_id}', [DireccionController::class, 'getMunicipios']);
+Route::get('/cv/parroquias/{municipio_id}', [DireccionController::class, 'getParroquias']);
+Route::get('/cv/ciudades/{estado_id}', [DireccionController::class, 'getCiudades']);
+

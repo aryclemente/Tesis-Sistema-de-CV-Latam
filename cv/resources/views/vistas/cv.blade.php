@@ -30,7 +30,7 @@
                         </div>
                         <div class="h-1 w-16 bg-gray-200 mb-6"></div>
                         <p class="text-lg mb-4">Agrega y administra tus direcciones personales y de contacto.</p>
-                        <a href="#">
+                        <a href="{{ route('cv.direccion.create')}}">
                             <button class="mt-4 bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700">
                                 Registrar
                             </button>
