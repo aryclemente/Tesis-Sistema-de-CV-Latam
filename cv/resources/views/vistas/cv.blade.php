@@ -46,7 +46,7 @@
                         </div>
                         <div class="h-1 w-16 bg-gray-200 mb-6"></div>
                         <p class="text-lg mb-4">Añade tu historial educativo y los títulos obtenidos.</p>
-                        <a href="#">
+                        <a href="{{ route('cv.estudios.create')}}">
                             <button class="mt-4 bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700">
                                 Registrar
                             </button>
@@ -94,7 +94,7 @@
                         </div>
                         <div class="h-1 w-16 bg-gray-200 mb-6"></div>
                         <p class="text-lg mb-4">Detalla tu historial laboral y responsabilidades previas.</p>
-                        <a href="#">
+                        <a href="{{ route('cv.experiencia.create')}}">
                             <button class="mt-4 bg-red-600 text-white py-2 px-4 rounded-md hover:bg-red-700">
                                 Registrar
                             </button>

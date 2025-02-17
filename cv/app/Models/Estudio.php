@@ -19,7 +19,7 @@ class Estudio extends Model
         'mencion_id',
     ];
 
-    public $timestamps = true; // Habilita timestamps
+    public $timestamps = false; // Habilita timestamps
 
     // Relaciones
     public function usuario()

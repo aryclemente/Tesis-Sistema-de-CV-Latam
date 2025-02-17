@@ -2109,6 +2109,8 @@ return new class extends Migration
                     $table->timestamps();
                 });
 
+              
+
                 Schema::create('experiencia_laboral_habilidad', function (Blueprint $table) {
                     $table->id();
 
@@ -2251,6 +2253,8 @@ return new class extends Migration
                 ->references('idmenciones')
                 ->on('menciones')
                 ->onDelete('cascade');
+
+                $table->timestamps();
         });
 
         Schema::create('idiomas', function (Blueprint $table) {
@@ -2258,7 +2262,7 @@ return new class extends Migration
             $table->string('idioma', 45);
             $table->string('nivel', 45);
         });
-        
+
         DB::table('idiomas')->insert([
             // Español
             ['ididiomas' => 1, 'idioma' => 'Español', 'nivel' => 'Básico'],

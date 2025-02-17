@@ -137,4 +137,16 @@ Route::get('/cv/idiomas', [IdiomaController::class, 'showIdiomas'])->name('cv.id
 Route::post('/cv/idiomas', [IdiomaController::class, 'storeIdiomas'])->name('cv.idiomas.store');
 
 
+use App\Http\Controllers\EstudioController;
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/cv/estudios', [EstudioController::class, 'create'])->name('cv.estudios.create');
+    Route::post('/cv/estudios', [EstudioController::class, 'store'])->name('cv.estudios.store');
+});
+
+
+use App\Http\Controllers\ExperienciaLaboralController;
+
+Route::get('/cv/experiencia', [ExperienciaLaboralController::class, 'create'])->name('cv.experiencia.create');
+Route::post('/cv/experiencia/store', [ExperienciaLaboralController::class, 'store'])->name('cv.experiencia.store');
 
