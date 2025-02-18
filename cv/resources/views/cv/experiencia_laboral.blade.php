@@ -58,7 +58,8 @@
                         <div>
                             <label for="fecha_inicio" class="block text-gray-700 font-semibold mb-1">Fecha Inicio:</label>
                             <input type="date" name="fecha_inicio" id="fecha_inicio" required
-                                class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-400 transition @error('fecha_inicio') border-red-500 @enderror">
+                                class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-400 transition @error('fecha_inicio') border-red-500 @enderror"
+                                max="{{ \Carbon\Carbon::now('America/Caracas')->format('Y-m-d') }}">
                             @error('fecha_inicio')
                                 <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                             @enderror
@@ -68,7 +69,8 @@
                         <div>
                             <label for="fecha_fin" class="block text-gray-700 font-semibold mb-1">Fecha Fin:</label>
                             <input type="date" name="fecha_fin" id="fecha_fin" required
-                                class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-400 transition @error('fecha_fin') border-red-500 @enderror">
+                                class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-400 transition @error('fecha_fin') border-red-500 @enderror"
+                                max="{{ \Carbon\Carbon::now('America/Caracas')->format('Y-m-d') }}">
                             @error('fecha_fin')
                                 <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                             @enderror

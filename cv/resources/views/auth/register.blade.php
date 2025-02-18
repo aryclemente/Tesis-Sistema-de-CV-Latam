@@ -118,7 +118,7 @@
                                         <input type="tel" id="phone" name="phone"
                                             class="w-full bg-white text-slate-700 placeholder:text-slate-400 text-sm border-2 rounded-lg px-4 py-3 pr-10 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200"
                                             placeholder="Ingrese su número de teléfono"
-                                            maxlength="12"
+                                            maxlength="11"
                                             pattern="[0-9+ -]*"
                                             oninput="this.value = this.value.replace(/[^0-9+ -]/g, '')"
                                         />
